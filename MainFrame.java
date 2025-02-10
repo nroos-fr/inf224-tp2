@@ -1,16 +1,12 @@
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.BorderLayout;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 public class MainFrame extends JFrame{
     private static final long serialVersionUID = 1L;
-    // JButton addLineButton1, addLineButton2, closeFrameButton;
-    // JPanel buttonPanel;
-    // JTextArea textArea;
-    // JScrollPane textScrollPane;
-    // JMenuBar menuBar;
-    // JMenu dropDownMenu;
-    // JToolBar toolBar;
+
     JPanel mediaListPanel;
     JButton refreshMediaList;
     JTextArea mediaListArea;
@@ -31,73 +27,11 @@ public class MainFrame extends JFrame{
     JTextArea playResult;
 
 
-    // class AddText1 extends AbstractAction {
-    //     public AddText1() {super("Add Hello world");}
-    //     public void actionPerformed(ActionEvent e) {
-    //         textArea.append("Hello world !\n");
-    //     }
-    // }
-
-    // class AddText2 extends AbstractAction {
-    //     public AddText2() {super("Add Goodbye world");}
-    //     public void actionPerformed(ActionEvent e) {
-    //         textArea.append("Goodbye world !\n");
-    //     }
-    // }
-
-    // class CloseAction extends AbstractAction {
-    //     public CloseAction() {super("Exit");}
-
-    //     public void actionPerformed(ActionEvent e) {
-    //         System.exit(0);;
-    //     }
-    // }
-
-    public static void main(String argv[]) {
-        new MainFrame();
-    }
-
-    public MainFrame() {
-        // addLineButton1 = new JButton(new AddText1());
-        // addLineButton2 = new JButton(new AddText2());
-        // closeFrameButton = new JButton(new CloseAction());
-        // buttonPanel = new JPanel();
-        // textArea = new JTextArea();
-        // textScrollPane = new JScrollPane(textArea);
-        // dropDownMenu=new JMenu("Menu");
-        // toolBar = new JToolBar();
-        // menuBar = new JMenuBar();
-
-        // JMenuItem addLine1MI = new JMenuItem(new AddText1());
-        // JMenuItem addLine2MI = new JMenuItem(new AddText2());
-        // JMenuItem closeMI = new JMenuItem(new CloseAction());
-
-        // // add menu bar and drop down menu
-        // dropDownMenu.add(addLine1MI);
-        // dropDownMenu.add(addLine2MI);
-        // dropDownMenu.add(closeMI);
-        // menuBar.add(dropDownMenu);
-
-        // //add buttons to tool bar
-        // toolBar.add(new JButton(new AddText1()));
-        // toolBar.add(new JButton(new AddText2()));
-        // toolBar.add(new JButton(new CloseAction()));
-
-
-        // //add buttons to south panel
-        // buttonPanel.add(addLineButton1);
-        // buttonPanel.add(addLineButton2);
-        // buttonPanel.add(closeFrameButton);
-
-        // //add elements to the frame
-        // add(buttonPanel, BorderLayout.SOUTH);
-        // add(textScrollPane, BorderLayout.CENTER);
-        // add(toolBar, BorderLayout.NORTH);
-        // setJMenuBar(menuBar);
-
+    public MainFrame(Function<String, String> searchCallback, Function<String, String> playCallback, Supplier<String> refreshMediaListCallback) {        
         mediaListPanel = new JPanel();
         refreshMediaList = new JButton("Refresh media list");
         mediaListArea = new JTextArea();
+        mediaListArea.setText(refreshMediaListCallback.get());
         mediaListArea.setEditable(false);
         mediaListScrollPane = new JScrollPane(mediaListArea);
 
@@ -114,6 +48,23 @@ public class MainFrame extends JFrame{
         playButton = new JButton("Play");
         playResult = new JTextArea();
         playResult.setEditable(false);
+
+
+        //add listeners on buttons
+        
+        searchButton.addActionListener( e -> {
+            String name = searchField.getText();
+            System.out.println(name);
+            searchResult.setText(searchCallback.apply(name));
+        });
+        playButton.addActionListener( e -> {
+            String name = playField.getText();
+            System.out.println(name);
+            playResult.setText(playCallback.apply(name));
+        });
+        refreshMediaList.addActionListener( e -> {
+            mediaListArea.setText(refreshMediaListCallback.get());
+        });
 
         add(mediaListPanel, BorderLayout.WEST);
         mediaListPanel.setLayout(new BoxLayout(mediaListPanel, BoxLayout.Y_AXIS));
@@ -137,6 +88,8 @@ public class MainFrame extends JFrame{
         playFieldButtonPanel.add(playField);
         playFieldButtonPanel.add(playButton);
         playPanel.add(playResult);
+
+        
 
 
         setTitle("Remote control");
