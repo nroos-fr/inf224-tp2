@@ -39,9 +39,9 @@ public class MyFrame extends JFrame{
     }
 
     public MyFrame() {
-        addLineButton1 = new JButton("Add line 1");
-        addLineButton2 = new JButton("Add line 2");
-        closeFrameButton = new JButton("Exit");
+        addLineButton1 = new JButton(new AddText1());
+        addLineButton2 = new JButton(new AddText2());
+        closeFrameButton = new JButton(new CloseAction());
         buttonPanel = new JPanel();
         textArea = new JTextArea();
         textScrollPane = new JScrollPane(textArea);
@@ -78,13 +78,13 @@ public class MyFrame extends JFrame{
 
 
         //add action to south buttons
-        addLineButton1.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                textArea.append("Line added by button 1.\n");
-            }
-        });
-        addLineButton2.addActionListener((e)->textArea.append("Line added by button 2.\n"));
-        closeFrameButton.addActionListener(e->System.exit(0));
+        // addLineButton1.addActionListener(new ActionListener() {
+        //     public void actionPerformed(ActionEvent e) {
+        //         textArea.append("Line added by button 1.\n");
+        //     }
+        // });
+        // addLineButton2.addActionListener((e)->textArea.append("Line added by button 2.\n"));
+        // closeFrameButton.addActionListener(e->System.exit(0));
 
 
 
