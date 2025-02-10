@@ -75,19 +75,7 @@ public class MyFrame extends JFrame{
         add(textScrollPane, BorderLayout.CENTER);
         add(toolBar, BorderLayout.NORTH);
         setJMenuBar(menuBar);
-
-
-        //add action to south buttons
-        // addLineButton1.addActionListener(new ActionListener() {
-        //     public void actionPerformed(ActionEvent e) {
-        //         textArea.append("Line added by button 1.\n");
-        //     }
-        // });
-        // addLineButton2.addActionListener((e)->textArea.append("Line added by button 2.\n"));
-        // closeFrameButton.addActionListener(e->System.exit(0));
-
-
-
+        
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pack();//compute positions
         setVisible(true);//show on screen
