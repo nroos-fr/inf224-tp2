@@ -1,7 +1,18 @@
+/**
+ * @file MyFrameStep1.java
+ * @author Nathan Roos
+ * @brief Legacy code for the step 1 of the TP2. 
+ * Type `java MyFrameStep1.java` in the terminal to test.
+ */
+
 import javax.swing.*;
 import java.awt.event.*;
 import java.awt.BorderLayout;
 
+/**
+ * @deprecated
+ * @brief Legacy code of the step 1 of the TP2
+ */
 public class MyFrameStep1 extends JFrame{
     private static final long serialVersionUID = 1L;
     JButton addLineButton1, addLineButton2, closeFrameButton;
@@ -29,13 +40,12 @@ public class MyFrameStep1 extends JFrame{
         add(textScrollPane, BorderLayout.CENTER);
 
 
-
+        //add events to the buttons
         addLineButton1.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 textArea.append("Line added by button 1.\n");
             }
         });
-
         addLineButton2.addActionListener((e)->textArea.append("Line added by button 2.\n"));
         closeFrameButton.addActionListener(e->System.exit(0));
 
